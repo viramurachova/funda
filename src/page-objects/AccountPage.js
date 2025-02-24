@@ -9,7 +9,6 @@ export class AccountPage extends BasePage{
         this.myAccountButton = page.locator('#headlessui-menu-item-v-0-40');
         this.welcomeMessage = page.locator('h1.text-2xl');
         this.logoutButton = page.locator('#headlessui-menu-item-v-0-41');
-
     }
 
     async navigateToMyAccountPage() {

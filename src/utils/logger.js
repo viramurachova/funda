@@ -25,7 +25,7 @@ const logger = winston.createLogger({
   format: logFormat,
   transports: [
     new winston.transports.Console(), // Log to console
-    new winston.transports.File({ filename: 'logs/test.log' }) // Log to a file
+    new winston.transports.File({ filename: 'logs/test.log' })
   ],
 });
 

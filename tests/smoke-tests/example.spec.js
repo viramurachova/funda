@@ -99,30 +99,6 @@ test('Search & Apply Filters (Buy)', async ({page}) => {
 //     // Add assertions
 });
 
-// Test 3: Contact Broker
-test('Contact Broker', async ({ page }) => {
-    logger.info('Navigating to Funda homepage');
-    await page.goto('https://www.funda.nl');
-
-    logger.info('Searching for Amsterdam and opening first property listing');
-    // Add code to search and open property
-
-    logger.info('Clicking Contact Broker button');
-    // Add code to click contact broker
-
-    logger.info('Verifying Contact Broker form appears');
-    // Add assertion
-
-    logger.info('Filling in required fields');
-    // Add code to fill form
-
-    logger.info('Submitting contact request');
-    // Add code to submit
-
-    logger.info('Verifying confirmation message appears');
-    // Add assertion
-});
-
 // Test 4: Find NVM Broker
 test('Find NVM Broker', async ({ page }) => {
     logger.info('Navigating to Funda homepage');

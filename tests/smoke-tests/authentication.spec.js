@@ -5,7 +5,6 @@ import {LoginPage} from "../../src/page-objects/LoginPage";
 import { expect } from '@playwright/test';
 import {AccountPage} from "../../src/page-objects/AccountPage";
 
-
 test('Login & Logout', async ({ page }) => {
 
     const basePage = new BasePage(page);
@@ -35,7 +34,6 @@ test('Login & Logout', async ({ page }) => {
     await accountPage.navigateToMyAccountPage();
     await expect(accountPage.welcomeMessage).toBeVisible();
     await expect(page).toHaveURL(/funda\.nl\/account|funda\.nl\//);
-
 
     logger.info('Clicking logout button');
     await page.waitForTimeout(1000);

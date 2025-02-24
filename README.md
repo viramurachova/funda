@@ -13,7 +13,6 @@ funda/                  # Root project directory
 │── src/                # Source code
 │   ├── page-objects/   # Page Object Model (POM) files
 │   │   ├── BasePage.js
-│   │   ├── HomePage.js
 │   │   ├── LoginPage.js
 │   │   ├── AccountPage.js
 │   ├── utils/          # Utility functions

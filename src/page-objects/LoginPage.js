@@ -1,6 +1,4 @@
-import { expect } from '@playwright/test';
 import {BasePage} from "./BasePage";
-import { test, config } from '../utils/test-config'
 
 export class LoginPage extends BasePage {
     constructor(page) {
@@ -10,7 +8,6 @@ export class LoginPage extends BasePage {
         this.email = page.locator('#UserName');
         this.password = page.locator('#Password');
         this.submitButton = page.locator('.btn.w-full.btn-primary.mr-6');
-
     }
 
     async fillLoginForm(){
@@ -21,6 +18,4 @@ export class LoginPage extends BasePage {
     async clickLoginButton(){
         await this.submitButton.click();
     }
-
-
-};
+}
