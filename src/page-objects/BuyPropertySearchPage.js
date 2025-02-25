@@ -29,28 +29,6 @@ export class BuyPropertySearchPage extends BasePage {
         await this.sortButton.selectOption({testId: 'SortButton-option-publish_date_utc_asc'});
     }
 
-    /**
-     * Fill in 'Price From' input and select from the dropdown
-     * @param {number} price
-     */
-    async fillInPriceFrom(price) {
-        await this.priceFromInput.fill(price.toString());
-        await this.page.keyboard.press('Enter');
-        await this.priceDropdown.first().waitFor({ state: 'visible' });
-        await this.page.locator(`ul[role="listbox"] li[role="option"]:has-text("${price.toLocaleString()}")`).click();
-    }
-
-    /**
-     * Fill in 'Price To' input and select from the dropdown
-     * @param {number} price
-     */
-    async fillInPriceTo(price) {
-        await this.priceToInput.fill(price.toString());
-        await this.page.keyboard.press('Enter');
-        await this.priceDropdown.first().waitFor({ state: 'visible' });
-        await this.page.locator(`ul[role="listbox"] li[role="option"]:has-text("${price.toLocaleString()}")`).click();
-    }
-
     async getFirstListingTitleAndPrice() {
         const [linkText, priceText] = await Promise.all([
             this.allAddressesSearchResalt.first().locator('span').first().textContent(),
@@ -61,6 +39,13 @@ export class BuyPropertySearchPage extends BasePage {
             apartmentTitle: linkText.trim(),
             apartmentPrice: priceText.trim(),
         };
+
+
+    }
+
+    async enterPriceRange() {
+        await this.priceFromInput.fill('75000', { force: true });
+        await this.priceToInput.fill('100000', { force: true });
     }
 
     async getResultsCities() {

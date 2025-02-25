@@ -30,8 +30,7 @@ test('Search and Apply Filters for Buying Properties', async ({ page }) => {
     await expect(buyPropertySearchPage.buyTab).toBeVisible();
 
     logger.info('Enter price range');
-    await buyPropertySearchPage.fillInPriceFrom(75000);
-    await buyPropertySearchPage.fillInPriceTo(100000);
+    await buyPropertySearchPage.enterPriceRange();
 
     logger.info('Select sorting: Price - low to high');
     await buyPropertySearchPage.setSorting();
@@ -41,10 +40,12 @@ test('Search and Apply Filters for Buying Properties', async ({ page }) => {
     const resultCities = await buyPropertySearchPage.getResultsCities();
     const resultPrices = await buyPropertySearchPage.getResultsPrices();
 
+    // **Assertions**
     logger.info('Verify all listings belong to selected city');
     for (const city of resultCities) {
         expect(city).toContain(selectedCity);
     }
+
     logger.info('Verify all listings are within the selected price range');
     for (const price of resultPrices) {
         expect(price).toBeGreaterThanOrEqual(75000);
@@ -56,4 +57,4 @@ test('Search and Apply Filters for Buying Properties', async ({ page }) => {
     expect(resultPrices).toEqual(sortedPrices);
 
     logger.info('Test completed successfully');
-})
+});
