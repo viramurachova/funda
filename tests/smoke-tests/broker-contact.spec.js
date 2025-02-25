@@ -25,8 +25,7 @@ test('Contact Broker', async ({ page }) => {
     await basePage.emptySearchSubmit();
 
     logger.info('Verify Buy Property Search Page is opened');
-    await expect(page).toHaveURL("https://www.funda.nl/zoeken/koop/");
-    //await expect(page).toHaveURL(/login\.funda\.nl\/zoeken\/koop/);
+    await expect(page).toHaveURL(/\/zoeken\/koop\/$/);
     await expect(buyPropertySearchPage.buyTab).toBeVisible();
 
     logger.info('Open the first property on the page');

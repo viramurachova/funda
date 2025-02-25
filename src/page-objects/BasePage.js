@@ -8,10 +8,15 @@ export class BasePage {
         this.findNVMAgentLink = page.locator('a[href*="/makelaar-zoeken"]').nth(4);
         this.cityNameSuggestionList = page.locator('[role="listbox"]');
         this.firstCityNameSuggested = page.getByTestId('SearchBox-location-suggestion').first();
+        this.forSaleButton = page.locator('button.tab-item.border-transparent').nth(0);
     }
 
     async navigate() {
         await this.page.goto('/');
+    }
+
+    async selectForSaleTab() {
+        await this.forSaleButton.click();
     }
 
     async emptySearchSubmit() {

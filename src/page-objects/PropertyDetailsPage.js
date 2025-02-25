@@ -9,6 +9,7 @@ export class PropertyDetailsPage extends BasePage{
         this.propertyTitle = page.locator('h1 span').first();
         this.propertyAddress = page.locator('h1 span').last();
         this.propertyPrice = this.propertyInfo.locator('ul + div div div').or(this.propertyInfo.locator('ul + div div[class=""]'));
+
     }
     async getListingPrice() {
          return this.propertyPrice.textContent();

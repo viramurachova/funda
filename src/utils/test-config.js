@@ -14,7 +14,7 @@ export const config = {
     testUsername: process.env.TEST_USERNAME,
 };
 
-// 🔹 Custom test setup that applies security settings like User-Agent
+// Custom test setup that applies security settings like User-Agent
 export const test = base.extend({
     page: async ({ browser }, use) => {
         const context = await browser.newContext({

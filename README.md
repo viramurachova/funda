@@ -33,29 +33,30 @@ This approach ensures that any fundamental issue preventing users from **searchi
 ```
 # Root project directory
 funda/                  
-│── .github/              # (Optional) GitHub workflows or issue templates      
-│── playwright-report/    # Playwright test reports
-│── src/                  # Source code
-│   ├── page-objects/     # Page Object Model (POM) files
+│── .github/                   
+│── playwright-report/    
+│── src/                  
+│   ├── page-objects/     
 │   │   ├── BasePage.js
 │   │   ├── LoginPage.js
 │   │   ├── AccountPage.js
 │   │   ├── BuyPropertySearchPage.js
 │   │   ├── PropertyDetailsPage.js
-│   ├── utils/            # Utility functions
-│   │   ├── logger.js     # Logging with Winston
-│   │   ├── test-config.js # Test configuration (loads env variables)
-│── tests/                # Test files
-│   ├── smoke-tests/      # High-priority end-to-end tests
+│   ├── utils/            
+│   │   ├── logger.js     
+│   │   ├── priceHelper.js
+│   │   ├── test-config.js 
+│── tests/                
+│   ├── smoke-tests/      
 │   │   ├── authentication.spec.js
 │   │   ├── search_and_filter_buy.spec.js
-│── .env                  # Environment variables (ignored in Git)
-│── .env.example          # Example env file (without real credentials)
-│── .gitignore            # Files and folders to ignore in Git
-│── package.json          # Node.js dependencies
-│── package-lock.json     # Lockfile for npm dependencies
-│── playwright.config.js  # Playwright test configuration
-│── README.md             # Project documentation
+│── .env                  
+│── .env.example          
+│── .gitignore            
+│── package.json          
+│── package-lock.json     
+│── playwright.config.js  
+│── README.md             
 ```
 ---
 
