@@ -64,12 +64,5 @@ test('Contact Broker', async ({ page }) => {
     //logger.info('Submit Contact Broker Form');
     //await contactBrokerPage.sendMessageButton();
 
-
-
-
-
-
-
-
-
+    logger.info({ message: 'Test completed successfully' });
 });

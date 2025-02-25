@@ -16,5 +16,4 @@ export class ContactBrokerPage extends BasePage{
     async viewPhoneNumber(){
         await this.showPhoneNumperButton.click();
     }
-
 }

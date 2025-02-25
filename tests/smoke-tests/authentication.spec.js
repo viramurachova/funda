@@ -43,4 +43,5 @@ test('Login & Logout', async ({ page }) => {
     await expect(page).toHaveURL(/login\.funda\.nl\/account\/login/);
     await expect(loginPage.submitButton).toBeVisible();
 
+    logger.info({ message: 'Test completed successfully' });
  });

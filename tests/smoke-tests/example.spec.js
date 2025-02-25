@@ -3,15 +3,6 @@ import { test } from '../../src/utils/test-config.js';
 import { expect } from '@playwright/test';
 import logger from '../../src/utils/logger.js';
 
-
-
-
-// test.beforeEach(async ({ browser }) => {
-//   await page.setExtraHTTPHeaders({User-Agent: process.});
-// });
-// await page.setExtraHTTPHeaders({'User-Agent': process.env.USER_AGENT})
-
-// Test 1: Search & Apply Filters (Buy)
 test('Search & Apply Filters (Buy)', async ({page}) => { 
   // Create a new page in the browser context and navigate to target URL
     await page.setExtraHTTPHeaders({'User-Agent': process.env.USER_AGENT})
@@ -68,8 +59,7 @@ test('Search & Apply Filters (Buy)', async ({page}) => {
 //     logger.info('Verifying property details page loads correctly');
 //     // Add assertions for property details
 // });
-
-// // Test 2: Search & Apply Filters (Rent)
+       //Test 2: Search & Apply Filters (Rent)
 // test('Search & Apply Filters (Rent)', async ({ page }) => {
 //     logger.info('Navigating to Funda homepage');
 //     await page.goto('https://www.funda.nl');
@@ -97,29 +87,5 @@ test('Search & Apply Filters (Buy)', async ({page}) => {
 
 //     logger.info('Verifying property details page loads correctly');
 //     // Add assertions
-});
-
-// Test 4: Find NVM Broker
-test('Find NVM Broker', async ({ page }) => {
-    logger.info('Navigating to Funda homepage');
-    await page.goto('https://www.funda.nl');
-
-    logger.info('Clicking Find an NVM Broker');
-    // Add code to click link
-
-    logger.info('Verifying NVM broker search page appears');
-    // Add assertion
-
-    logger.info('Selecting Buy as help category');
-    // Add code to select Buy
-
-    logger.info('Entering search location: The Hague');
-    // Add code to enter location
-
-    logger.info('Clicking search button');
-    // Add code to search
-
-    logger.info('Verifying broker listings appear');
-    // Add assertion
 });
 

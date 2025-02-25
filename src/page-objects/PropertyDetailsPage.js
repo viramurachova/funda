@@ -4,8 +4,7 @@ export class PropertyDetailsPage extends BasePage{
     constructor(page) {
         super(page);
         this.page = page;
-        this.contactAgentButton = page.locator('a[href*="makelaar-contact"]').first()
-
+        this.contactAgentButton = page.locator('a[href*="makelaar-contact"]').first();
     }
 
     async openContactBrokerForm(){
