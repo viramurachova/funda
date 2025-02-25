@@ -15,7 +15,7 @@ test('Login & Logout', async ({ page }) => {
     await basePage.navigate();
 
     logger.info('Accept cookies');
-    await basePage.acceptCookies.click()
+    await basePage.acceptCookies.click();
 
     logger.info('Clicking Login');
     await basePage.loginButton.click();
@@ -43,5 +43,5 @@ test('Login & Logout', async ({ page }) => {
     await expect(page).toHaveURL(/login\.funda\.nl\/account\/login/);
     await expect(loginPage.submitButton).toBeVisible();
 
-    logger.info({ message: 'Test completed successfully' });
+    logger.info('Test completed successfully');
  });
