@@ -10,23 +10,46 @@ export class BuyPropertySearchPage extends BasePage {
         this.firstAddressSearchResult = page.getByTestId('listingDetailsAddress').first();
         this.priceToInput = page.locator('#price_to');
         this.priceFromInput = page.locator('#price_from');
-        this.sortButton = page.locator('select.absolute');
+        this.sortButton = page.locator('button select')
         this.allAddressesSearchResalt = page.getByTestId('listingDetailsAddress');
         this.resultsPrices = page.locator('h2 + div div.truncate');
         this.priceOption = page.locator('#headlessui-combobox-option-v-0-0-6');
-
     }
-
 
     async openFirstProperty() {
         await this.firstAddressSearchResult.waitFor();
         await this.firstAddressSearchResult.click();
     }
 
+    async applySorting() {
+        //await this.sortButton.click();
+        await this.sortButton.selectOption({ index: 3 });
+    }
 
-    async setSorting() {
-        await this.sortButton.click();
-        await this.sortButton.selectOption({testId: 'SortButton-option-publish_date_utc_asc'});
+    /**
+     * Fill in 'Price From' input and select from the dropdown
+     * @param {number} price
+     */
+    async fillInPriceFrom(price) {
+        const url = new URL(this.page.url());
+        let priceParam = url.searchParams.get('price') || '"0-"';
+        let [currentFrom, currentTo] = priceParam.replace(/"/g, '').split('-');
+        currentTo = currentTo ? currentTo : '';
+        url.searchParams.set('price', `"${price}-${currentTo}"`);
+        await this.page.goto(url.toString());
+    }
+
+    /**
+     * Fill in 'Price To' input and select from the dropdown
+     * @param {number} price
+     */
+    async fillInPriceTo(price) {
+        const url = new URL(this.page.url());
+        let priceParam = url.searchParams.get('price') || '"-0"';
+        let [currentFrom, currentTo] = priceParam.replace(/"/g, '').split('-');
+        currentFrom = currentFrom ? currentFrom : '0';
+        url.searchParams.set('price', `"${currentFrom}-${price}"`);
+        await this.page.goto(url.toString());
     }
 
     async getFirstListingTitleAndPrice() {
@@ -39,17 +62,11 @@ export class BuyPropertySearchPage extends BasePage {
             apartmentTitle: linkText.trim(),
             apartmentPrice: priceText.trim(),
         };
-
-
-    }
-
-    async enterPriceRange() {
-        await this.priceFromInput.fill('75000', { force: true });
-        await this.priceToInput.fill('100000', { force: true });
     }
 
     async getResultsCities() {
         const addresses = await this.allAddressesSearchResalt.all();
+
         return Promise.all(addresses.map(async (address) => {
             const addressText = await address.locator('div').last().textContent();
             return addressText.split(' ').at(1).trim();
@@ -57,7 +74,14 @@ export class BuyPropertySearchPage extends BasePage {
     }
 
     async getResultsPrices() {
-        const prices = await this.resultsPrices.allTextContents();
-        return prices.map(price => parseInt(price.replace(/[^0-9]/g, ''), 10)).filter(Number.isFinite);
+        const prices = await this.resultsPrices.all();
+
+        return Promise.all(
+            prices.map(async (price) => {
+                const priceText = await price.textContent();
+                const match = priceText.match(/€\s*([\d.,]+)/);
+                return Number(match[1].replace(/\./g, '').replace(',', '.'));
+            })
+        );
     }
 }

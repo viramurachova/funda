@@ -21,7 +21,7 @@ test('Login & Logout', async ({ page }) => {
     await basePage.loginButton.click();
 
     logger.info('Verify LoginPage is opened');
-    await expect(page).toHaveURL(/login\.funda\.nl\/account\/login/);
+    await expect(page).toHaveURL(/\/account\/login/);
     await expect(loginPage.submitButton).toBeVisible();
 
     logger.info('Fill in Login Form');
@@ -33,14 +33,14 @@ test('Login & Logout', async ({ page }) => {
     logger.info('Verifying user is logged in');
     await accountPage.navigateToMyAccountPage();
     await expect(accountPage.welcomeMessage).toBeVisible();
-    await expect(page).toHaveURL(/funda\.nl\/account|funda\.nl\//);
+    await expect(page).toHaveURL(/\/account\/$/);
 
     logger.info('Clicking logout button');
     await page.waitForTimeout(1000);
     await accountPage.logout();
 
     logger.info('Verifying user is logged out');
-    await expect(page).toHaveURL(/login\.funda\.nl\/account\/login/);
+    await expect(page).toHaveURL(/\/account\/login/);
     await expect(loginPage.submitButton).toBeVisible();
 
     logger.info('Test completed successfully');

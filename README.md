@@ -4,31 +4,58 @@
 
 This project is an automated test suite for the Funda platform using Playwright. It follows best practices such as the **Page Object Model (POM)** and **environment-based configuration** to ensure secure and scalable testing.
 
+## Test Selection Criteria & Strategy
+
+### Reasoning for Selecting These Smoke Tests
+
+These tests were chosen based on business-critical functionality that directly impacts the core user journey on Funda. The primary goal of smoke testing is to ensure that essential features work as expected, allowing users to search for properties, view details, contact brokers, find certified agents, and authenticate their accounts without issues.
+
+Each test is designed to be lightweight yet effective, covering only the most crucial filters and interactions while avoiding unnecessary refinements that do not significantly impact the platform’s usability.
+
+###  Selected Smoke Tests:
+- **Search & Apply Filters (Buy & Rent)** → Ensures users can find properties with basic filtering options (**City, Price, Sorting**). These are the **minimum requirements** for a functional property search.
+- **Contact Broker** → Allows users to **initiate communication with brokers**, which is a key conversion point on the platform.
+- **Find NVM Broker** → Ensures that users can locate **certified real estate agents**, a major feature for users seeking real estate expertise.
+- **Login & Logout** → Verifies **authentication**, which is essential for users managing **saved properties, inquiries, and profile settings**.
+
+###  Why These Filters?
+By limiting filters to **only the most impactful ones** (**City, Buy/Rent, Price, Sorting**), the test suite remains:
+
+✔ **Efficient** – Focuses on essential flows without overcomplicating automation.  
+✔ **Scalable** – Can be extended with more detailed filtering options if needed.  
+✔ **Automation-friendly** – Reduces test flakiness by avoiding excessive dependencies on dynamic data.  
+✔ **Focused on Critical Failures** – Detects **fundamental issues** early, ensuring that users can **complete primary actions** without friction.
+
+This approach ensures that any fundamental issue preventing users from **searching, filtering, contacting brokers, or logging in** is caught **immediately**, allowing for quick fixes before further testing is conducted. 🚀
+
 ## Project Structure
 
 ```
-funda/                  # Root project directory
-│── .github/            # (Optional) GitHub workflows or issue templates      
-│── playwright-report/  # Playwright test reports
-│── src/                # Source code
-│   ├── page-objects/   # Page Object Model (POM) files
+# Root project directory
+funda/                  
+│── .github/              # (Optional) GitHub workflows or issue templates      
+│── playwright-report/    # Playwright test reports
+│── src/                  # Source code
+│   ├── page-objects/     # Page Object Model (POM) files
 │   │   ├── BasePage.js
 │   │   ├── LoginPage.js
 │   │   ├── AccountPage.js
-│   ├── utils/          # Utility functions
-│   │   ├── logger.js   # Logging with Winston
+│   │   ├── BuyPropertySearchPage.js
+│   │   ├── PropertyDetailsPage.js
+│   ├── utils/            # Utility functions
+│   │   ├── logger.js     # Logging with Winston
 │   │   ├── test-config.js # Test configuration (loads env variables)
-│── tests/              # Test files
-│   ├── smoke-tests/
+│── tests/                # Test files
+│   ├── smoke-tests/      # High-priority end-to-end tests
 │   │   ├── authentication.spec.js
-│   │   ├── example.spec.js
-│── .env                # Environment variables (ignored in Git)
-│── .env.example        # Example env file (without real credentials)
-│── .gitignore          # Files and folders to ignore in Git
-│── package.json        # Node.js dependencies
-│── package-lock.json   # Lockfile for npm dependencies
-│── playwright.config.js # Playwright test configuration
-│── README.md           # Project documentation
+│   │   ├── search_and_filter_buy.spec.js
+│── .env                  # Environment variables (ignored in Git)
+│── .env.example          # Example env file (without real credentials)
+│── .gitignore            # Files and folders to ignore in Git
+│── package.json          # Node.js dependencies
+│── package-lock.json     # Lockfile for npm dependencies
+│── playwright.config.js  # Playwright test configuration
+│── README.md             # Project documentation
 ```
 ---
 
@@ -65,12 +92,7 @@ cd funda
 
 ```sh
 npm install
-npm install dotenv
-npm install winston
 ```
-
-- **`dotenv`**: Loads environment variables from a `.env` file.
-- **`winston`**: Logger for structured logging.
 
 ### **3. Configure Environment Variables**
 
