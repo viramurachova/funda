@@ -40,38 +40,7 @@ actions** without friction.
 This approach ensures that any fundamental issue preventing users from **searching, filtering, contacting brokers, or
 logging in** is caught **immediately**, allowing for quick fixes before further testing is conducted. 🚀
 
-## Project Structure
 
-```
-# Root project directory
-funda/                  
-│── .github/                   
-│── playwright-report/    
-│── src/                  
-│   ├── page-objects/     
-│   │   ├── BasePage.js
-│   │   ├── LoginPage.js
-│   │   ├── AccountPage.js
-│   │   ├── BuyPropertySearchPage.js
-│   │   ├── PropertyDetailsPage.js
-│   ├── utils/            
-│   │   ├── logger.js     
-│   │   ├── priceHelper.js
-│   │   ├── test-config.js 
-│── tests/                
-│   ├── smoke-tests/      
-│   │   ├── authentication.spec.js
-│   │   ├── search_and_filter_buy.spec.js
-│── .env                  
-│── .env.example          
-│── .gitignore            
-│── package.json          
-│── package-lock.json     
-│── playwright.config.js  
-│── README.md             
-```
-
----
 
 ## Pre-Installation Steps
 
