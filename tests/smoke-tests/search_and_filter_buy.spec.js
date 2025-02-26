@@ -1,12 +1,12 @@
-import { test } from '../../src/utils/test-config.js';
+import {test} from '../../src/utils/test-config.js';
 import {BasePage} from '../../src/page-objects/BasePage'
 import logger from "../../src/utils/logger";
-import { expect } from '@playwright/test';
+import {expect} from '@playwright/test';
 import staticData from "../../src/test-data/test-data.json";
 import {BuyPropertySearchPage} from "../../src/page-objects/BuyPropertySearchPage";
 import {PropertyDetailsPage} from "../../src/page-objects/PropertyDetailsPage";
 
-test('Search and Apply Filters for Buying Properties', async ({ page }) => {
+test('Search and Apply Filters for Buying Properties', async ({page}) => {
 
     const basePage = new BasePage(page);
     const selectedCity = staticData.city;
@@ -60,7 +60,7 @@ test('Search and Apply Filters for Buying Properties', async ({ page }) => {
     expect(pricesAfterSorting).toEqual(sortedPrices);
 
     logger.info('Getting title and price of the first property listing');
-    const { apartmentTitle, apartmentPrice } = await buyPropertySearchPage.getFirstListingTitleAndPrice();
+    const {apartmentTitle, apartmentPrice} = await buyPropertySearchPage.getFirstListingTitleAndPrice();
 
     logger.info('Click to the first listing');
     await buyPropertySearchPage.openFirstProperty();

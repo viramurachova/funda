@@ -17,24 +17,45 @@ export class FindAgentPage extends BasePage {
         this.citySearchResults = page.locator('p.mb-1.py-1');
     }
 
+    /**
+     * Click the search button
+     * @returns {Promise<void>}
+     */
     async clickSearchButton() {
         await this.searchButton.click();
     }
 
+    /**
+     * Select the 'Buy Wizard' option
+     * @returns {Promise<void>}
+     */
     async selectBuyWizardOption() {
         await this.buyWizardButton.hover();
         await this.buyWizardButton.click();
     }
 
+    /**
+     * Fill in the office name (city) in the search field
+     * @param {string} city - The city name to input
+     * @returns {Promise<void>}
+     */
     async fillInOfficeName(city) {
         await this.searchBrokerInput.pressSequentially(city.toString())
     }
 
+    /**
+     * Get and select the first suggested city from the list
+     * @returns {Promise<void>}
+     */
     async selectFirstCity() {
         await this.citySuggestionList.waitFor();
         await this.firstSuggestedCity.click();
     }
 
+    /**
+     * Get all city names from the search results
+     * @returns {Promise<string[]>} - An array of city names
+     */
     async getAllCityNames() {
         await this.citySearchResults.first().waitFor(); // Ensure results are loaded
         return await this.citySearchResults.allTextContents();

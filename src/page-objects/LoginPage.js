@@ -10,12 +10,20 @@ export class LoginPage extends BasePage {
         this.submitButton = page.locator('.btn.w-full.btn-primary.mr-6');
     }
 
-    async fillLoginForm(){
+    /**
+     * Fill in the login form with credentials
+     * @returns {Promise<void>}
+     */
+    async fillLoginForm() {
         await this.email.fill(process.env.LOGIN_EMAIL);
         await this.password.fill(process.env.LOGIN_PASSWORD);
     }
 
-    async clickLoginButton(){
+    /**
+     * Click the login button
+     * @returns {Promise<void>}
+     */
+    async clickLoginButton() {
         await this.submitButton.click();
     }
 }

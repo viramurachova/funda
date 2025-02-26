@@ -1,6 +1,6 @@
 import {BasePage} from "./BasePage";
 
-export class ContactBrokerPage extends BasePage{
+export class ContactBrokerPage extends BasePage {
     constructor(page) {
         super(page);
         this.page = page;
@@ -12,8 +12,13 @@ export class ContactBrokerPage extends BasePage{
         this.lastNameInput = page.locator('#lastName');
         this.phoneNumberInput = page.locator('#phoneNumber');
 
-}
-    async viewPhoneNumber(){
+    }
+
+    /**
+     * View Phone Number
+     * @returns {Promise<void>}
+     */
+    async viewPhoneNumber() {
         await this.showPhoneNumperButton.click();
     }
 }

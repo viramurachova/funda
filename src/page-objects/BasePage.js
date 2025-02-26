@@ -11,26 +11,51 @@ export class BasePage {
         this.forSaleButton = page.locator('button.tab-item.border-transparent').nth(0);
     }
 
+    /**
+     * Navigate to the homepage
+     * @returns {Promise<void>}
+     */
     async navigate() {
         await this.page.goto('/');
     }
 
+    /**
+     * Select the 'For Sale' tab
+     * @returns {Promise<void>}
+     */
     async selectForSaleTab() {
         await this.forSaleButton.click();
     }
 
+    /**
+     * Submit an empty search
+     * @returns {Promise<void>}
+     */
     async emptySearchSubmit() {
         await this.searchButton.click();
     }
 
+    /**
+     * Open the 'Find NVM Agent' page
+     * @returns {Promise<void>}
+     */
     async openFindNVMAgentPage() {
         await this.findNVMAgentLink.click();
     }
 
+    /**
+     * Enter a city name in the search field
+     * @param {string} city - The name of the city to enter
+     * @returns {Promise<void>}
+     */
     async enterCityName(city) {
         await this.searchInputField.pressSequentially(city.toString())
     }
 
+    /**
+     * Get and select the first suggested city from the list
+     * @returns {Promise<void>}
+     */
     async selectFirstCity() {
         await this.cityNameSuggestionList.waitFor();
         await this.firstCityNameSuggested.click();

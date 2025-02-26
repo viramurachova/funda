@@ -1,13 +1,13 @@
-import { test } from '../../src/utils/test-config.js';
+import {test} from '../../src/utils/test-config.js';
 import {BasePage} from '../../src/page-objects/BasePage'
 import logger from "../../src/utils/logger";
-import { expect } from '@playwright/test';
+import {expect} from '@playwright/test';
 import {BuyPropertySearchPage} from "../../src/page-objects/BuyPropertySearchPage";
 import {PropertyDetailsPage} from "../../src/page-objects/PropertyDetailsPage";
 import {ContactBrokerPage} from "../../src/page-objects/ContactBrokerPage";
 import {generateTestData} from "../../src/test-data/test-data";
 
-test('Contact Broker', async ({ page }) => {
+test('Contact Broker', async ({page}) => {
 
     const basePage = new BasePage(page);
     const buyPropertySearchPage = new BuyPropertySearchPage(page);
@@ -29,11 +29,9 @@ test('Contact Broker', async ({ page }) => {
     await expect(buyPropertySearchPage.buyTab).toBeVisible();
 
     logger.info('Open the first property on the page');
-    await page.waitForTimeout(1000);
     await buyPropertySearchPage.openFirstProperty();
 
     logger.info('Verify Property Details Page is opened');
-    await page.waitForTimeout(10000);
     await expect(propertyDetailsPage.contactAgentButton).toBeVisible();
 
     logger.info('Open the first property on the page');

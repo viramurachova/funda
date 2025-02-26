@@ -1,11 +1,11 @@
-import { test } from '../../src/utils/test-config.js';
+import {test} from '../../src/utils/test-config.js';
 import {BasePage} from '../../src/page-objects/BasePage'
 import logger from "../../src/utils/logger";
 import {LoginPage} from "../../src/page-objects/LoginPage";
-import { expect } from '@playwright/test';
+import {expect} from '@playwright/test';
 import {AccountPage} from "../../src/page-objects/AccountPage";
 
-test('Login & Logout', async ({ page }) => {
+test('Login & Logout', async ({page}) => {
 
     const basePage = new BasePage(page);
     const loginPage = new LoginPage(page);
@@ -31,17 +31,16 @@ test('Login & Logout', async ({ page }) => {
     await loginPage.clickLoginButton();
 
     logger.info('Verifying user is logged in');
-    await accountPage.navigateToMyAccountPage();
-    await expect(accountPage.welcomeMessage).toBeVisible();
-    await expect(page).toHaveURL(/\/account\/$/);
+    await accountPage.openAccountDropDownMenu();
+    await expect(accountPage.accountDropDownMenu).toBeVisible();
 
     logger.info('Clicking logout button');
-    await page.waitForTimeout(1000);
     await accountPage.logout();
 
     logger.info('Verifying user is logged out');
+    await basePage.loginButton.click();
     await expect(page).toHaveURL(/\/account\/login/);
     await expect(loginPage.submitButton).toBeVisible();
 
     logger.info('Test completed successfully');
- });
+});

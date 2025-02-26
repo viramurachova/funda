@@ -14,13 +14,21 @@ export class BuyPropertySearchPage extends BasePage {
         this.resultsPrices = page.locator('h2 + div div.truncate');
     }
 
+    /**
+     * Open the first property in the search results
+     * @returns {Promise<void>}
+     */
     async openFirstProperty() {
         await this.firstAddressSearchResult.waitFor();
         await this.firstAddressSearchResult.click();
     }
 
+    /**
+     * Apply sorting to the search results
+     * @returns {Promise<void>}
+     */
     async applySorting() {
-        await this.sortButton.selectOption({ index: 3 });
+        await this.sortButton.selectOption({index: 3});
     }
 
     /**
@@ -49,6 +57,10 @@ export class BuyPropertySearchPage extends BasePage {
         await this.page.goto(url.toString());
     }
 
+    /**
+     * Retrieve the first listing title and price
+     * @returns {Promise<{apartmentTitle: string, apartmentPrice: string}>}
+     */
     async getFirstListingTitleAndPrice() {
         const [linkText, priceText] = await Promise.all([
             this.allAddressesSearchResalt.first().locator('span').first().textContent(),
@@ -61,6 +73,10 @@ export class BuyPropertySearchPage extends BasePage {
         };
     }
 
+    /**
+     * Get all city names from the search results
+     * @returns {Promise<string[]>}
+     */
     async getResultsCities() {
         const addresses = await this.allAddressesSearchResalt.all();
 
@@ -70,6 +86,10 @@ export class BuyPropertySearchPage extends BasePage {
         }));
     }
 
+    /**
+     * Get a list of apartment prices from the search results
+     * @returns {Promise<number[]>} - A list of apartment prices as numbers
+     */
     async getResultsPrices() {
         const prices = await this.resultsPrices.all();
 

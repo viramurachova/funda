@@ -1,14 +1,14 @@
-import { test } from '../../src/utils/test-config.js';
+import {test} from '../../src/utils/test-config.js';
 import {BasePage} from '../../src/page-objects/BasePage'
 import logger from "../../src/utils/logger";
-import { expect } from '@playwright/test';
+import {expect} from '@playwright/test';
 import staticData from "../../src/test-data/test-data.json";
 import {RentPropertySearchPage} from "../../src/page-objects/RentPropertySearchPage";
 import {BuyPropertySearchPage} from "../../src/page-objects/BuyPropertySearchPage";
 import {PropertyDetailsPage} from "../../src/page-objects/PropertyDetailsPage";
-import { formatRentPrice } from "../../src/utils/priceHelper";
+import {formatRentPrice} from "../../src/utils/priceHelper";
 
-test('Search and Apply Filters for Renting Properties', async ({ page }) => {
+test('Search and Apply Filters for Renting Properties', async ({page}) => {
     const basePage = new BasePage(page);
     const selectedCity = staticData.city;
     const buyPropertySearchPage = new BuyPropertySearchPage(page);
@@ -65,7 +65,7 @@ test('Search and Apply Filters for Renting Properties', async ({ page }) => {
     expect(pricesAfterSorting).toEqual(sortedPrices);
 
     logger.info('Getting title and price of the first property listing');
-    const { apartmentTitle, apartmentPrice } = await rentPropertySearchPage.getFirstListingTitleAndPrice();
+    const {apartmentTitle, apartmentPrice} = await rentPropertySearchPage.getFirstListingTitleAndPrice();
 
     logger.info('Click to the first listing');
     await buyPropertySearchPage.openFirstProperty();
