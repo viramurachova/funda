@@ -73,7 +73,6 @@ test('Search and Apply Filters for Renting Properties', async ({page}) => {
     logger.info('Verifying property details');
     await expect(propertyDetailsPage.propertyTitle).toContainText(apartmentTitle);
     await expect(propertyDetailsPage.propertyAddress).toContainText(selectedCity);
-    //await expect(propertyDetailsPage.propertyPrice).toContainText(apartmentPrice);
     await expect(propertyDetailsPage.propertyPrice).toContainText(formatRentPrice(apartmentPrice))
 
     logger.info('Test completed successfully');

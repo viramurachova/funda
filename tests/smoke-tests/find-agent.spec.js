@@ -9,7 +9,6 @@ import {generateTestData} from "../../src/test-data/test-data";
 test('Find an NVM agent', async ({page}) => {
     const basePage = new BasePage(page);
     const findAgentPage = new FindAgentPage(page);
-    const testData = generateTestData();
     const selectedCity = staticData.city;
 
     logger.info('Navigating to Funda homepage');
