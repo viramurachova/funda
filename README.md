@@ -3,7 +3,7 @@
 ## Overview
 
 This project is an automated test suite for the Funda platform using Playwright. It follows best practices such as the *
-*Page Object Model (POM)** and **environment-based configuration** to ensure secure and scalable testing.
+**Page Object Model (POM)** and **environment-based configuration** to ensure secure and scalable testing.
 
 ## Test Selection Criteria & Strategy
 
