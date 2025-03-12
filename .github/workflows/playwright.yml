@@ -4,6 +4,7 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+    types: [opened, synchronize, reopened]
   workflow_dispatch:
     inputs:
       USER_AGENT:
@@ -23,6 +24,7 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    environment: Test
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -32,12 +34,23 @@ jobs:
         run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+
+      - name: Debug Environment Variables
+        run: |
+          echo "USER_AGENT=${{ secrets.USER_AGENT }}"
+          echo "LOGIN_EMAIL=${{ secrets.LOGIN_EMAIL }}"
+          echo "LOGIN_PASSWORD=${{ secrets.LOGIN_PASSWORD }}"
+
+      - name: List All Environment Variables
+        run: env
+
       - name: Run Playwright tests
         env:
-          USER_AGENT: ${{ inputs.USER_AGENT != '' && inputs.USER_AGENT || secrets.USER_AGENT }}
-          LOGIN_EMAIL: ${{ inputs.LOGIN_EMAIL != '' && inputs.LOGIN_EMAIL || secrets.LOGIN_EMAIL }}
-          LOGIN_PASSWORD: ${{ inputs.LOGIN_PASSWORD != '' && inputs.LOGIN_PASSWORD || secrets.LOGIN_PASSWORD }}
+          USER_AGENT: ${{ secrets.USER_AGENT }}
+          LOGIN_EMAIL: ${{ secrets.LOGIN_EMAIL }}
+          LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
         run: npx playwright test
+
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
