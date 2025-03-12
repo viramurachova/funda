@@ -41,7 +41,6 @@ export class BuyPropertySearchPage extends BasePage {
     }
     
     async getFirstListingTitleAndPrice() {
-        
         const [linkText, priceText] = await Promise.all([
             this.allAddressesSearchResult.first().locator('span').first().textContent(),
             this.resultsPrices.first().textContent()

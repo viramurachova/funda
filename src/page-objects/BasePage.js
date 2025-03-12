@@ -32,6 +32,7 @@ export class BasePage {
     }
 
     async selectFirstCity() {
+        await this.page.waitForRequest(request => request.url().includes('https://api.seg.funda.nl/v1/t'));
         await this.firstCityNameSuggested.click();
     }
 
