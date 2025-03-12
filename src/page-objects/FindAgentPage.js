@@ -26,7 +26,7 @@ export class FindAgentPage extends BasePage {
     }
 
     async fillInOfficeName(city) {
-        await this.page.waitForRequest(request => request.url().includes('https://api.seg.funda.nl/v1/t'));
+        //await this.page.waitForRequest(request => request.url().includes('https://api.seg.funda.nl/v1/t'));
         await this.searchBrokerInput.waitFor({state: 'attached'});
         await this.searchBrokerInput.pressSequentially(city.toString())
     }

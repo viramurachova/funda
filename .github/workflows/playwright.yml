@@ -35,15 +35,6 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Debug Environment Variables
-        run: |
-          echo "USER_AGENT=${{ secrets.USER_AGENT }}"
-          echo "LOGIN_EMAIL=${{ secrets.LOGIN_EMAIL }}"
-          echo "LOGIN_PASSWORD=${{ secrets.LOGIN_PASSWORD }}"
-
-      - name: List All Environment Variables
-        run: env
-
       - name: Run Playwright tests
         env:
           USER_AGENT: ${{ secrets.USER_AGENT }}

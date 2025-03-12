@@ -11,7 +11,6 @@ export class AccountPage extends BasePage {
 
     async openAccountDropDownMenu() {
         await this.accountButton.click();
-        await this.myAccountButton.waitFor()
     }
 
     async logout() {

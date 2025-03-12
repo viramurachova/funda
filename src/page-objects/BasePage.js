@@ -32,7 +32,6 @@ export class BasePage {
     }
 
     async selectFirstCity() {
-        await this.cityNameSuggestionList.waitFor();
         await this.firstCityNameSuggested.click();
     }
 
