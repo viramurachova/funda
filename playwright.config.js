@@ -11,7 +11,8 @@ export default defineConfig({
         baseURL: 'https://www.funda.nl/en',
         userAgent: process.env.USER_AGENT || 'default-user-agent',
         trace: 'on-first-retry',
-
+        //slowMo: 500,
+        reuseExistingServer: true
     },
     projects: [
         {

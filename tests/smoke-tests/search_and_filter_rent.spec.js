@@ -14,8 +14,8 @@ test('Search and Apply Filters for Renting Properties', async ({page}) => {
     const buyPropertySearchPage = new BuyPropertySearchPage(page);
     const rentPropertySearchPage = new RentPropertySearchPage(page);
     const propertyDetailsPage = new PropertyDetailsPage(page);
-    const priceFrom = 1000;
-    const priceTo = 2000;
+    const priceFrom = 2000;
+    const priceTo = 3000;
 
     logger.info('Navigating to Funda homepage');
     await basePage.navigate();
@@ -55,7 +55,7 @@ test('Search and Apply Filters for Renting Properties', async ({page}) => {
 
     logger.info('Apply sorting');
     await rentPropertySearchPage.applySorting();
-    await page.waitForTimeout(5000)
+
 
     logger.info('Getting updated property prices after sorting.');
     const pricesAfterSorting = await rentPropertySearchPage.getResultsPrices();

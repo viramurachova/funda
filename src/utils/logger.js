@@ -1,6 +1,5 @@
 import winston from 'winston';
 
-// Function to format timestamp in European format (DD-MM-YYYY HH:mm:ss)
 const formatTimestamp = () => {
     const now = new Date();
     return now.toLocaleString('nl-NL', {
@@ -14,12 +13,10 @@ const formatTimestamp = () => {
     }).replace(',', '');
 };
 
-// Define log format
 const logFormat = winston.format.printf(({level, message}) => {
     return `[${formatTimestamp()}] ${level.toUpperCase()}: ${message}`;
 });
 
-// Create Winston logger
 const logger = winston.createLogger({
     level: 'info',
     format: logFormat,

@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 import {test as base} from '@playwright/test';
 
-// Load environment variables from .env
 dotenv.config();
 
 export const config = {
@@ -14,7 +13,6 @@ export const config = {
     testUsername: process.env.TEST_USERNAME,
 };
 
-// Custom test setup that applies security settings like User-Agent
 export const test = base.extend({
     page: async ({browser}, use) => {
         const context = await browser.newContext({

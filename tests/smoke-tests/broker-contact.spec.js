@@ -31,10 +31,7 @@ test('Contact Broker', async ({page}) => {
     logger.info('Open the first property on the page');
     await buyPropertySearchPage.openFirstProperty();
 
-    logger.info('Verify Property Details Page is opened');
-    await expect(propertyDetailsPage.contactAgentButton).toBeVisible();
-
-    logger.info('Open the first property on the page');
+    logger.info('Open Contact Broker Form');
     await propertyDetailsPage.openContactBrokerForm();
 
     logger.info('Verify Contact Broker Page is opened');

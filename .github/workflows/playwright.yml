@@ -1,9 +1,24 @@
 name: Playwright Tests
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      USER_AGENT:
+        description: "User agent string"
+        required: false
+        default: ""
+      LOGIN_EMAIL:
+        description: "Login email"
+        required: false
+        default: ""
+      LOGIN_PASSWORD:
+        description: "Login password"
+        required: false
+        default: ""
+
 jobs:
   test:
     timeout-minutes: 60
@@ -18,6 +33,10 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
+        env:
+          USER_AGENT: ${{ inputs.USER_AGENT != '' && inputs.USER_AGENT || secrets.USER_AGENT }}
+          LOGIN_EMAIL: ${{ inputs.LOGIN_EMAIL != '' && inputs.LOGIN_EMAIL || secrets.LOGIN_EMAIL }}
+          LOGIN_PASSWORD: ${{ inputs.LOGIN_PASSWORD != '' && inputs.LOGIN_PASSWORD || secrets.LOGIN_PASSWORD }}
         run: npx playwright test
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}

@@ -1,5 +1,4 @@
 import {BasePage} from "./BasePage";
-
 export class PropertyDetailsPage extends BasePage {
     constructor(page) {
         super(page);
@@ -9,13 +8,8 @@ export class PropertyDetailsPage extends BasePage {
         this.propertyTitle = page.locator('h1 span').first();
         this.propertyAddress = page.locator('h1 span').last();
         this.propertyPrice = this.propertyInfo.locator('ul + div div div').or(this.propertyInfo.locator('ul + div div[class=""]'));
-
     }
 
-    /**
-     * Open the contact broker form
-     * @returns {Promise<void>}
-     */
     async openContactBrokerForm() {
         await this.contactAgentButton.click();
     }

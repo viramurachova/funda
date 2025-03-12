@@ -50,7 +50,6 @@ test('Search and Apply Filters for Buying Properties', async ({page}) => {
 
     logger.info('Apply sorting');
     await buyPropertySearchPage.applySorting();
-    await page.waitForTimeout(5000)
 
     logger.info('Getting updated property prices after sorting.');
     const pricesAfterSorting = await buyPropertySearchPage.getResultsPrices();

@@ -3,9 +3,9 @@ import {BasePage} from '../../src/page-objects/BasePage'
 import logger from "../../src/utils/logger";
 import {LoginPage} from "../../src/page-objects/LoginPage";
 import {expect} from '@playwright/test';
-import {AccountPage} from "../../src/page-objects/AccountPage";
+    import {AccountPage} from "../../src/page-objects/AccountPage";
 
-test('Login & Logout', async ({page}) => {
+    test('Login & Logout', async ({page}) => {
 
     const basePage = new BasePage(page);
     const loginPage = new LoginPage(page);
