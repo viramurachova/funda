@@ -14,7 +14,9 @@ export default defineConfig({
         userAgent: process.env.USER_AGENT || 'default-user-agent',
         headless: true,
         screenshot: 'only-on-failure',
-        video: 'retain-on-failure',
+        video: {
+            mode: 'on-first-retry'
+          },
         reuseExistingServer: true
     },
     projects: [{
