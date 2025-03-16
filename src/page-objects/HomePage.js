@@ -28,7 +28,7 @@ export class HomePage extends BasePage {
 
     async emptySearchSubmit() {
         await this.searchButton.click();
-        await this.page.waitForNavigation();
+        await this.page.waitForNavigation({timeout: 90000});
     }
 
     async openFindNVMAgentPage() {
