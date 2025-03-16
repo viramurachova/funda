@@ -1,24 +1,23 @@
 import {test} from '../../src/utils/test-config.js';
-import {BasePage} from '../../src/page-objects/BasePage'
 import {FindAgentPage} from "../../src/page-objects/FindAgentPage";
 import logger from "../../src/utils/logger";
 import {expect} from '@playwright/test';
 import staticData from '../../src/test-data/test-data.json';
-import {generateTestData} from "../../src/test-data/test-data";
+import {HomePage} from "../../src/page-objects/HomePage";
 
 test('Find an NVM agent', async ({page}) => {
-    const basePage = new BasePage(page);
+    const homePage = new HomePage(page);
     const findAgentPage = new FindAgentPage(page);
     const selectedCity = staticData.city;
 
     logger.info('Navigating to Funda homepage');
-    await basePage.navigate();
+    await homePage.navigate();
 
     logger.info('Accept cookies');
-    await basePage.acceptCookies.click();
+    await homePage.acceptCookies.click();
 
     logger.info('Navigating to Find an NVM agent page');
-    await basePage.openFindNVMAgentPage();
+    await homePage.openFindNVMAgentPage();
 
     logger.info('Select Buy option');
     await findAgentPage.selectBuyWizardOption();
@@ -39,6 +38,4 @@ test('Find an NVM agent', async ({page}) => {
     for (const city of cities) {
         expect(city.toLowerCase().trim()).toContain(selectedCity.toLowerCase());
     }
-
-    logger.info('Test completed successfully');
 });

@@ -1,14 +1,13 @@
 import {test} from '../../src/utils/test-config.js';
-import {BasePage} from '../../src/page-objects/BasePage'
 import logger from "../../src/utils/logger";
 import {expect} from '@playwright/test';
 import staticData from "../../src/test-data/test-data.json";
 import {BuyPropertySearchPage} from "../../src/page-objects/BuyPropertySearchPage";
 import {PropertyDetailsPage} from "../../src/page-objects/PropertyDetailsPage";
+import {HomePage} from "../../src/page-objects/HomePage";
 
 test('Search and Apply Filters for Buying Properties', async ({page}) => {
-
-    const basePage = new BasePage(page);
+    const homePage = new HomePage(page);
     const selectedCity = staticData.city;
     const buyPropertySearchPage = new BuyPropertySearchPage(page);
     const propertyDetailsPage = new PropertyDetailsPage(page);
@@ -16,14 +15,14 @@ test('Search and Apply Filters for Buying Properties', async ({page}) => {
     const priceTo = 125000;
 
     logger.info('Navigating to Funda homepage');
-    await basePage.navigate();
+    await homePage.navigate();
 
     logger.info('Accept cookies');
-    await basePage.acceptCookies.click();
+    await homePage.acceptCookies.click();
 
     logger.info('Enter city');
-    await basePage.enterCityName(selectedCity);
-    await basePage.selectFirstCity();
+    await homePage.enterCityName(selectedCity);
+    await homePage.selectFirstCity();
 
     logger.info('Verify correct City search');
     await expect(buyPropertySearchPage.selectedCityName).toHaveText(selectedCity);
@@ -68,6 +67,4 @@ test('Search and Apply Filters for Buying Properties', async ({page}) => {
     await expect(propertyDetailsPage.propertyTitle).toContainText(apartmentTitle);
     await expect(propertyDetailsPage.propertyAddress).toContainText(selectedCity);
     await expect(propertyDetailsPage.propertyPrice).toContainText(apartmentPrice);
-
-    logger.info('Test completed successfully');
 });
