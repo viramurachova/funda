@@ -5,13 +5,16 @@ export default defineConfig({
     fullyParallel: true,
     forbidOnly: !!process.env.CI,
     retries: process.env.CI ? 2 : 1,
+    timeout: 60000,
     workers: process.env.CI ? 5 : 1,
     reporter: 'html',
+
     use: {
         baseURL: 'https://www.funda.nl/en',
         userAgent: process.env.USER_AGENT || 'default-user-agent',
         headless: true,
         screenshot: 'only-on-failure',
+        video: 'retain-on-failure',
         reuseExistingServer: true
     },
     projects: [{
