@@ -26,7 +26,7 @@ test('Contact Broker', async ({page}) => {
     logger.info('Open the first property on the page');
     await buyPropertySearchPage.openFirstProperty();
 
-    logger.info(' View Broker phone number');
+    logger.info('View Broker phone number');
     await propertyDetailsPage.viewPhoneNumber();
     await expect(page.locator('div.group.px-6')).toHaveClass(/is-clicked/);
 
