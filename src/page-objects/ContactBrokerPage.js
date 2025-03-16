@@ -10,11 +10,8 @@ export class ContactBrokerPage extends BasePage {
         this.firstNameInput = page.locator('#firstName');
         this.lastNameInput = page.locator('#lastName');
         this.phoneNumberInput = page.locator('#phoneNumber');
-        this.contactBrokerForm = page.locator('.flex.flex-col.divide-y.divide-neutral-20');
+        
     }
 
-    async viewPhoneNumber() {
-        await this.contactBrokerForm.waitFor();
-        await this.showPhoneNumberButton.click();
-    }
+   
 }

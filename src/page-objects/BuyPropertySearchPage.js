@@ -17,6 +17,7 @@ export class BuyPropertySearchPage extends BasePage {
 
     async openFirstProperty() {
         await this.firstAddressSearchResult.click();
+        await this.page.waitForRequest(request => request.url().includes('https://api.seg.funda.nl/v1/t'))
     }
 
     async applySorting() {
@@ -26,7 +27,7 @@ export class BuyPropertySearchPage extends BasePage {
 
     async fillInPriceFrom(price) {
         await this.page.waitForRequest(request => request.url().includes('https://api.seg.funda.nl/v1/t'));
-        await this.priceFromInput.waitFor({state: 'attached'});
+        await this.priceFromInput.waitFor({state: 'attached'}, {timeout: 5000});
         await this.priceFromInput.click(); 
         await this.page.keyboard.type(price.toString(), { delay: 100 }); 
         await this.page.keyboard.press('Enter'); 
@@ -35,6 +36,7 @@ export class BuyPropertySearchPage extends BasePage {
 
     async fillInPriceTo(price) {
         await this.priceToInput.click(); 
+        await this.priceToInput.waitFor({state: 'attached'}, {timeout: 5000});
         await this.page.keyboard.type(price.toString(), { delay: 100 });
         await this.page.keyboard.press('Enter');
         await this.page.waitForRequest(request => request.url().includes('https://api.seg.funda.nl/v1/t'));
@@ -42,10 +44,10 @@ export class BuyPropertySearchPage extends BasePage {
     
     async getFirstListingTitleAndPrice() {
         const [linkText, priceText] = await Promise.all([
-            this.allAddressesSearchResult.first().locator('span').first().textContent(),
-            this.resultsPrices.first().textContent()
+            this.allAddressesSearchResult.first().locator('span').first().textContent({timeout: 5000}),
+            this.resultsPrices.first().textContent({timeout: 5000})
         ]);
-
+        
         return {
             apartmentTitle: linkText.trim(),
             apartmentPrice: priceText.trim(),

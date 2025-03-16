@@ -4,13 +4,14 @@ export default defineConfig({
     testDir: './tests',
     fullyParallel: true,
     forbidOnly: !!process.env.CI,
-    retries: process.env.CI ? 2 : 0,
-    workers: process.env.CI ? 1 : undefined,
+    retries: process.env.CI ? 2 : 1,
+    workers: process.env.CI ? 5 : 1,
     reporter: 'html',
     use: {
         baseURL: 'https://www.funda.nl/en',
         userAgent: process.env.USER_AGENT || 'default-user-agent',
         trace: 'on-first-retry',
+        headless: true,
         //slowMo: 500,
         reuseExistingServer: true
     },

@@ -32,14 +32,15 @@ export class RentPropertySearchPage extends BasePage {
         await this.priceToInput.click(); 
         await this.page.keyboard.type(price.toString(), { delay: 100 });
         await this.page.keyboard.press('Enter');
-        await this.page.waitForRequest(request => request.url().includes('https://api.seg.funda.nl/v1/t'));
+        await this.page.waitForRequest(request => request.url().includes('https://api.seg.funda.nl/v1/t', { timeout: 60000 }));
     }
 
     async getFirstListingTitleAndPrice() {
         const [linkText, priceText] = await Promise.all([
-            this.allAddressesSearchResult.first().locator('span').first().textContent(),
-            this.resultsPrices.first().textContent()
+            this.allAddressesSearchResult.first().locator('span').first().textContent({timeout: 10000}),
+            this.resultsPrices.first().textContent({timeout: 10000})
         ]);
+
         return {
             apartmentTitle: linkText.trim(),
             apartmentPrice: priceText.trim(),

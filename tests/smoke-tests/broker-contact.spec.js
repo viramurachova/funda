@@ -30,15 +30,13 @@ test('Contact Broker', async ({page}) => {
     logger.info('Open the first property on the page');
     await buyPropertySearchPage.openFirstProperty();
 
-    logger.info('Open Contact Broker Form');
-    await propertyDetailsPage.openContactBrokerForm();
-
-    logger.info('Verify Contact Broker Page is opened');
-    await expect(contactBrokerPage.sendMessageButton).toBeVisible();
-
     logger.info(' View Broker phone number');
-    await contactBrokerPage.viewPhoneNumber();
+    await propertyDetailsPage.viewPhoneNumber();
     await expect(page.locator('div.group.px-6')).toHaveClass(/is-clicked/);
+
+    logger.info('Open Contact Broker Form');
+    await propertyDetailsPage.openContactBrokerForm(); 
+    await expect(contactBrokerPage.sendMessageButton).toBeVisible({ timeout: 10000 });   
 
     logger.info('Fill Contact broker form');
     await contactBrokerPage.questionInput.fill(testData.question);

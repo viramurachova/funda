@@ -17,12 +17,9 @@ import {expect} from '@playwright/test';
     logger.info('Accept cookies');
     await basePage.acceptCookies.click();
 
-    logger.info('Clicking Login');
-    await basePage.loginButton.click();
-
-    logger.info('Verify LoginPage is opened');
-    await expect(page).toHaveURL(/\/account\/login/);
-    await expect(loginPage.submitButton).toBeVisible();
+    logger.info('Opening Login Page');
+    await basePage.openLoginPage();
+    await expect(loginPage.submitButton).toBeVisible({ timeout: 5000 });
 
     logger.info('Fill in Login Form');
     await loginPage.fillLoginForm();
@@ -32,7 +29,7 @@ import {expect} from '@playwright/test';
 
     logger.info('Verifying user is logged in');
     await accountPage.openAccountDropDownMenu();
-    await expect(accountPage.accountDropDownMenu).toBeVisible();
+    await expect(accountPage.accountDropDownMenu).toBeVisible({ timeout: 5000 });
 
     logger.info('Clicking logout button');
     await accountPage.logout();

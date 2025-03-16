@@ -21,18 +21,18 @@ export class FindAgentPage extends BasePage {
 
     async selectBuyWizardOption() {
         await this.page.waitForRequest(request => request.url().includes('https://api.seg.funda.nl/v1/t'));
-        await this.buyWizardButton.waitFor({state: 'attached'});
+        await this.buyWizardButton.waitFor({state: 'attached'}, {timeout: 10000});
         await this.buyWizardButton.click();
     }
 
+
     async fillInOfficeName(city) {
-        await this.page.waitForRequest(request => request.url().includes('https://api.seg.funda.nl/v1/t'));
-        await this.searchBrokerInput.waitFor({state: 'attached'});
+        await this.searchBrokerInput.waitFor({state: 'visible'}, {timeout: 5000});
         await this.searchBrokerInput.pressSequentially(city.toString())
     }
 
     async selectFirstCity() {
-        await this.citySuggestionList.waitFor({state: 'visible'});
+        await this.citySuggestionList.waitFor({state: 'visible'}, {timeout: 5000});
         await this.firstSuggestedCity.click();
     }
 

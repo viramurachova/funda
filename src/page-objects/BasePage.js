@@ -10,6 +10,10 @@ export class BasePage {
         this.firstCityNameSuggested = page.getByTestId('SearchBox-location-suggestion').first();
         this.forSaleButton = page.locator('button.tab-item.border-transparent').nth(0);
     }
+    async openLoginPage() {
+        await this.page.waitForRequest(request => request.url().includes('https://api.seg.funda.nl/v1/t'));
+        await this.loginButton.click();
+    }
 
     async navigate() {
         await this.page.goto('/');
@@ -28,11 +32,12 @@ export class BasePage {
     }
 
     async enterCityName(city) {
+        await this.page.waitForRequest(request => request.url().includes('https://api.seg.funda.nl/v1/t'), { timeout: 1000 });
         await this.searchInputField.pressSequentially(city.toString())
     }
 
     async selectFirstCity() {
-        await this.page.waitForRequest(request => request.url().includes('https://api.seg.funda.nl/v1/t'));
+        await this.firstCityNameSuggested.waitFor({state: "visible"});
         await this.firstCityNameSuggested.click();
     }
 
