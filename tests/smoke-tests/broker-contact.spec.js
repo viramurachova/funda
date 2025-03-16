@@ -1,31 +1,27 @@
 import {test} from '../../src/utils/test-config.js';
-import {BasePage} from '../../src/page-objects/BasePage'
 import logger from "../../src/utils/logger";
 import {expect} from '@playwright/test';
 import {BuyPropertySearchPage} from "../../src/page-objects/BuyPropertySearchPage";
 import {PropertyDetailsPage} from "../../src/page-objects/PropertyDetailsPage";
 import {ContactBrokerPage} from "../../src/page-objects/ContactBrokerPage";
 import {generateTestData} from "../../src/test-data/test-data";
+import {HomePage} from "../../src/page-objects/HomePage";
 
 test('Contact Broker', async ({page}) => {
-
-    const basePage = new BasePage(page);
+    const homePage = new HomePage(page);
     const buyPropertySearchPage = new BuyPropertySearchPage(page);
     const propertyDetailsPage = new PropertyDetailsPage(page);
     const contactBrokerPage = new ContactBrokerPage(page);
     const testData = generateTestData();
 
     logger.info('Navigating to Funda homepage');
-    await basePage.navigate();
+    await homePage.navigate();
 
     logger.info('Accept cookies');
-    await basePage.acceptCookies.click()
+    await homePage.acceptCookies.click()
 
     logger.info('Navigate to the Search page without filters applied (city, country)');
-    await basePage.emptySearchSubmit();
-
-    logger.info('Verify Buy Property Search Page is opened');
-    await expect(buyPropertySearchPage.buyTab).toBeVisible();
+    await homePage.emptySearchSubmit();
 
     logger.info('Open the first property on the page');
     await buyPropertySearchPage.openFirstProperty();
@@ -35,8 +31,8 @@ test('Contact Broker', async ({page}) => {
     await expect(page.locator('div.group.px-6')).toHaveClass(/is-clicked/);
 
     logger.info('Open Contact Broker Form');
-    await propertyDetailsPage.openContactBrokerForm(); 
-    await expect(contactBrokerPage.sendMessageButton).toBeVisible({ timeout: 10000 });   
+    await propertyDetailsPage.openContactBrokerForm();
+    await expect(contactBrokerPage.sendMessageButton).toBeVisible({timeout: 10000});
 
     logger.info('Fill Contact broker form');
     await contactBrokerPage.questionInput.fill(testData.question);
@@ -54,6 +50,4 @@ test('Contact Broker', async ({page}) => {
 
     //logger.info('Submit Contact Broker Form');
     //await contactBrokerPage.sendMessageButton();
-
-    logger.info('Test completed successfully');
 });

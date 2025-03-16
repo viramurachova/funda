@@ -10,18 +10,13 @@ export default defineConfig({
     use: {
         baseURL: 'https://www.funda.nl/en',
         userAgent: process.env.USER_AGENT || 'default-user-agent',
-        trace: 'on-first-retry',
         headless: true,
-        //slowMo: 500,
+        screenshot: 'only-on-failure',
         reuseExistingServer: true
     },
-    projects: [
-        {
-            name: 'chromium',
-            use: {
-                ...devices['Desktop Chrome'],
-                viewport: {width: 1920, height: 1080},
-            },
+    projects: [{
+        name: 'chromium', use: {
+            ...devices['Desktop Chrome'], viewport: {width: 1920, height: 1080},
         },
-    ],
+    },],
 });
