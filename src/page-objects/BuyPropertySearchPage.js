@@ -15,7 +15,7 @@ export class BuyPropertySearchPage extends BasePage {
     }
 
     async openFirstProperty() {
-        await this.firstAddressSearchResult.waitFor({state: 'attached', timeout: 15000});
+        await this.firstAddressSearchResult.waitFor({state: 'attached', timeout: 45000});
         await this.firstAddressSearchResult.waitFor({state: 'visible', timeout: 10000});
         await this.firstAddressSearchResult.click();
         await this.page.waitForRequest(request => request.url().includes('https://api.seg.funda.nl/v1/t'))

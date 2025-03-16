@@ -40,7 +40,8 @@ export class HomePage extends BasePage {
     }
 
     async selectFirstCity() {
-        await this.firstCityNameSuggested.waitFor({state: "visible"});
+        await this.firstCityNameSuggested.waitFor({state: 'attached', timeout: 45000});
+        await this.firstCityNameSuggested.waitFor({state: 'visible', timeout: 10000});
         await this.firstCityNameSuggested.click();
     }
 }
